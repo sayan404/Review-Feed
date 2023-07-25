@@ -1,0 +1,19 @@
+.mainParentContainer{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    background-color: #F4F4F4;
+    transition: all 0.5s ease;
+}
+.filterMainContainer{
+    height: 100%;
+    width: 20%;
+    position: sticky;
+    top: 0px;
+    /* background-color: blue; */
+}
+.reviewMainContainer{
+    height: 100%;
+    width: 80%;
+    /* background-color: blue; */
+}

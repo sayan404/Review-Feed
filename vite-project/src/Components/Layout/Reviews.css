@@ -1,0 +1,70 @@
+.reviewsContainer {
+    margin: 10px 20px 10px;
+    position: relative;
+    width: 95%;
+    background-color: #FEFEFE;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+.topCrdSection {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3.5vh 3.5vh 3.5vh 0;
+    font: 1vmax sans-serif;
+}
+
+.leftTopSection {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.leftTopSection>p {
+    padding-left: 3vmax;
+}
+.rightTopSection > p{
+    padding: 0 2.6vh 5px 10px;
+}
+
+.sectionDivider {
+    height: 3px;
+    width: 95%;
+    margin: 0 auto;
+    background-color: yellowgreen;
+}
+.bottomCrdSection{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.leftBottomSection {
+    padding: 3.5vh 0.5vh 3.5vh 6.3vh;
+    width: 60%;
+    font: 0.9vmax cursive;
+    letter-spacing: 1px;
+}
+.rightBottomSection{
+    width: 20%;
+    padding: 3.5vh 0.5vh 3.5vh 6.3vh;
+    font: 0.9vmax sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.rightBottomSection > p{
+    padding: 0 5vh 5px 10px;
+}
+
+@media only screen and (max-width: 830px) {
+    .leftTopSection>p {
+        padding-left: 1vmin;
+    }
+
+    .topCrdSection {
+        font: 0.8vmax sans-serif;
+        padding: 2vh;
+    }
+}
