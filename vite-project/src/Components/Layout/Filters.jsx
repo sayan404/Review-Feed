@@ -235,7 +235,7 @@ const Filters = () => {
         <form className="searchBox" onSubmit={searchSubmitHandler}>
           <input
             type="text"
-            placeholder="Search"
+            placeholder="Search Product Name"
             onChange={(e) => setKeyword(e.target.value)}
           />
           <div className="iconBox">
