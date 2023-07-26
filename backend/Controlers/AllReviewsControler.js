@@ -31,14 +31,14 @@ exports.getProductReview = catchAsyncError(async (req, res, next) => {
     // console.log("1");
 
     try {
-        const savedReview = await ProductReview.find(queryObject)
-        allReviews.push(savedReview);
+        const savedReviews = await ProductReview.find(queryObject)
+        allReviews.push(savedReviews);
         const productListLength = allReviews.length;
         // console.log(allReviews);
         res.json({
             success: true,
             productListLength,
-            allReviews: allReviews,
+            allReviews: allReviews.flat(),
         });
     } catch (err) {
         res.status(500).json({ success: false, message: err.message });

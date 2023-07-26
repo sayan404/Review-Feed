@@ -36,37 +36,3 @@ const ReviewSection = () => {
 };
 
 export default ReviewSection;
-/*
-datePosted
-: 
-"2023-07-24T23:18:23.072Z"
-numLikes
-: 
-100
-productName
-: 
-"Awesome Gizmo"
-productType
-: 
-"Tech"
-productVersion
-: 
-"4.1"
-reviewText
-: 
-"Overall, a great product. It would be perfect with a built-in camera."
-reviewType
-: 
-"Feature request"
-reviewerName
-: 
-"Emily Wilson"
-starRating
-: 
-4
-__v
-: 
-0
-_id
-: 
-"64bf06bf1745d7fd5e373b80"*/
