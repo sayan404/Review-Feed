@@ -1,40 +1,37 @@
-import React, { useState, useEffect } from 'react'
-import './Filters.css'
+import React, { useState, useEffect } from "react";
+import "./Filters.css";
 import "./Search.css";
-import '../Options.css'
-import { Button } from '@mui/material'
-import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
-import Checkbox from '@mui/material/Checkbox';
-import StarIcon from '@mui/icons-material/Star';
-import SearchIcon from '@mui/icons-material/Search';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import "../Options.css";
+import { Button } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import Checkbox from "@mui/material/Checkbox";
+import StarIcon from "@mui/icons-material/Star";
+import SearchIcon from "@mui/icons-material/Search";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import ClearIcon from "@mui/icons-material/Clear";
-import { clearErrors, getProductReviews } from '../../Actions/ReviewActions';
-import { set } from 'mongoose';
+import { clearErrors, getProductReviews } from "../../Actions/ReviewActions";
 
-const appVersion = [
-  "1.0.0", "1.1.1", "2.1.1", "1.1.2"
-]
 
-const categories = [
-  "T-Shirt",
-  "Footwear",
-  "Bottom",
-  "Tops",
-  "Attire",
-  "Watch",
-  "SmartPhones",
-  "Tech",
-  "Electronics"
+const appVersion = ["1.0.0","1.0.2" , "1.1.1", "1.1.2" , "2.1.1" ];
+
+const categories = ["T-Shirt", "Footwear", "Tops", "Tech", "Electronics"];
+
+const DateRangeList = [
+  "1 Hour",
+  "1 Day",
+  "1 Week",
+  "1 Month",
+  "6 Month",
+  "1 year",
+  "> 1 Year",
 ];
-
+const BugList = ["Bug", "Feature request", "Appreciation"]
+const SortByList = ["Likes", "Views", "Explanation", "Relevency"];
 
 const Filters = () => {
-  const dispatch = useDispatch()
-  const params = useParams()
-  const { error, reviews } = useSelector(state => state.reviews)
+  const dispatch = useDispatch();
+  const { error, reviews } = useSelector((state) => state.reviews);
 
   const [keyword, setKeyword] = useState("");
   const [sort, setSort] = useState(false);
@@ -53,16 +50,14 @@ const Filters = () => {
   const [likeOptions, setLikeOptions] = useState([]);
   const [applyFilters, setApplyFilters] = useState(false);
 
-
-
   // const device = params.device
 
-  // Searching 
+  // Searching
   const searchSubmitHandler = (e) => {
     e.preventDefault();
-  }
+  };
 
-  //  sorting 
+  //  sorting
   const SortingClickHandler = (e) => {
     e.preventDefault();
     sort ? setSort(false) : setSort(true);
@@ -70,15 +65,15 @@ const Filters = () => {
   const menuItemHandlerSorting = (e) => {
     e.preventDefault();
     const choice = e.target.innerText;
-    if(sortChoosenOptions.includes(choice)){
-      return ;
+    if (sortChoosenOptions.includes(choice)) {
+      return;
     }
     setSortChoosenOptions((prev) => [...prev, choice]);
   };
   const removeOptionSorting = (index) => {
     setSortChoosenOptions((prevOptions) =>
       prevOptions.filter((e, idx) => idx !== index)
-    )
+    );
   };
 
   // Date Range
@@ -88,17 +83,16 @@ const Filters = () => {
   };
   const menuItemHandlerDate = (e) => {
     const choice = e.target.innerText;
-    if(dateChoosenOptions.includes(choice)){
-      return ;
+    if (dateChoosenOptions.includes(choice)) {
+      return;
     }
     setDateChoosenOptions((prev) => [...prev, choice]);
-    
   };
   const removeOptionDateChange = (index) => {
     setDateChoosenOptions((prevOptions) =>
       prevOptions.filter((_, idx) => idx !== index)
-    )
-  }
+    );
+  };
 
   // App Version
   const clickHandlerVersion = (e) => {
@@ -107,19 +101,18 @@ const Filters = () => {
   };
   const menuItemHandlerVersion = (e) => {
     const choice = e.target.innerText;
-    if(versionOptions.includes(choice)){
-      return ;
+    if (versionOptions.includes(choice)) {
+      return;
     }
     setVersionOptions((prev) => [...prev, choice]);
-
   };
   const removeOptionVerion = (index) => {
     setVersionOptions((prevOptions) =>
       prevOptions.filter((_, idx) => idx !== index)
-    )
-  }
+    );
+  };
 
-  // Rating 
+  // Rating
 
   const clickHandlerRating = (e) => {
     e.preventDefault();
@@ -128,22 +121,20 @@ const Filters = () => {
   const menuItemHandlerRating = (e) => {
     const choice = e.target.value;
     const checked = e.target.checked;
-    if(ratingOptions.includes(choice)){
-      return ;
+    if (ratingOptions.includes(choice)) {
+      return;
     }
     if (checked) {
       setRatingOptions((prev) => [...prev, choice]);
     }
-
   };
   const removeOptionRaing = (index) => {
     setRatingOptions((prevOptions) =>
       prevOptions.filter((_, idx) => idx !== index)
-    )
-
+    );
   };
 
-  // Review 
+  // Review
   const clickHandlerReview = (e) => {
     e.preventDefault();
     review ? setReview(false) : setReview(true);
@@ -151,20 +142,18 @@ const Filters = () => {
   const menuItemHandlerReview = (e) => {
     e.preventDefault();
     const choice = e.target.innerText;
-    if(reviewOptions.includes(choice)){
-      return ;
+    if (reviewOptions.includes(choice)) {
+      return;
     }
     setReviewOptions((prev) => [...prev, choice]);
-    
   };
   const removeOptionReview = (index) => {
     setReviewOptions((prevOptions) =>
       prevOptions.filter((e, idx) => idx !== index)
     );
-   
   };
 
-  // Device 
+  // Device
   const clickHandlerDevice = (e) => {
     e.preventDefault();
     deviceopt ? setDeviceopt(false) : setDeviceopt(true);
@@ -173,61 +162,75 @@ const Filters = () => {
     e.preventDefault();
 
     const choice = e.target.innerText;
-    if(deviceOptions.includes(choice)){
-      return ;
+    if (deviceOptions.includes(choice)) {
+      return;
     }
     setDeviceOptions((prev) => [...prev, choice]);
-    
   };
   const removeOptionDevice = (index) => {
     setDeviceOptions((prevOptions) =>
       prevOptions.filter((e, idx) => idx !== index)
     );
-    
   };
 
-
-  // Likes 
+  // Likes
 
   const clickHandlerLike = (e) => {
-    e.preventDefault()
-    like ? setLike(false) : setLike(true)
-  }
+    e.preventDefault();
+    like ? setLike(false) : setLike(true);
+  };
   const menuItemHandlerLike = (e) => {
-    e.preventDefault()
-    const choice = e.target.innerText
-    if(likeOptions.includes(choice)){
-      return ;
+    e.preventDefault();
+    const choice = e.target.innerText;
+    if (likeOptions.includes(choice)) {
+      return;
     }
-    setLikeOptions((prev) => [...prev, choice])
+    setLikeOptions((prev) => [...prev, choice]);
   };
   const removeOptionLike = (index) => {
     setLikeOptions((prevOptions) =>
       prevOptions.filter((e, idx) => idx !== index)
-    )
-  }
+    );
+  };
   function applyFilterHandler() {
     if (error) {
-      return dispatch(clearErrors())
+      return dispatch(clearErrors());
     }
-    dispatch(getProductReviews(deviceOptions , ratingOptions , versionOptions , reviewOptions , likeOptions ,keyword ))
+    dispatch(
+      getProductReviews(
+        deviceOptions,
+        ratingOptions,
+        versionOptions,
+        reviewOptions,
+        likeOptions,
+        keyword
+      )
+    );
   }
-  useEffect((e)=>{
-    dispatch(getProductReviews(deviceOptions , ratingOptions , versionOptions , reviewOptions , likeOptions ,keyword  ))
-  },[])
+  useEffect((e) => {
+    dispatch(
+      getProductReviews(
+        deviceOptions,
+        ratingOptions,
+        versionOptions,
+        reviewOptions,
+        likeOptions,
+        keyword
+      )
+    );
+  }, []);
   function resetFilterHandler() {
-    setSortChoosenOptions([])
-    setDateChoosenOptions([])
-    setVersionOptions([])
-    setRatingOptions([])
-    setReviewOptions([])
-    setDeviceOptions([])
-    setLikeOptions([])
-
+    setSortChoosenOptions([]);
+    setDateChoosenOptions([]);
+    setVersionOptions([]);
+    setRatingOptions([]);
+    setReviewOptions([]);
+    setDeviceOptions([]);
+    setLikeOptions([]);
   }
 
   return (
-    <div className='filterContainer'>
+    <div className="filterContainer">
       <>
         <form className="searchBox" onSubmit={searchSubmitHandler}>
           <input
@@ -236,7 +239,7 @@ const Filters = () => {
             onChange={(e) => setKeyword(e.target.value)}
           />
           <div className="iconBox">
-            <SearchIcon sx={{ fontSize: "2vmax", color: 'white' }} />
+            <SearchIcon sx={{ fontSize: "2vmax", color: "white" }} />
           </div>
         </form>
       </>
@@ -246,14 +249,22 @@ const Filters = () => {
           {!sort ? (
             <div className="arrowicon">
               <KeyboardArrowDownIcon
-                sx={{ fontSize: "2vmax", color: "#49356C", paddingRight: "3px" }}
+                sx={{
+                  fontSize: "2vmax",
+                  color: "#49356C",
+                  paddingRight: "3px",
+                }}
                 onClick={SortingClickHandler}
               />
             </div>
           ) : (
             <div className="arrowicon">
               <KeyboardArrowUpIcon
-                sx={{ fontSize: "2vmax", color: "#8246FF", paddingRight: "3px" }}
+                sx={{
+                  fontSize: "2vmax",
+                  color: "#8246FF",
+                  paddingRight: "3px",
+                }}
                 onClick={SortingClickHandler}
               />
             </div>
@@ -261,10 +272,9 @@ const Filters = () => {
         </div>
         {sort ? (
           <div className="manuItem" onClick={menuItemHandlerSorting}>
-            <p>Likes</p>
-            <p>Views</p>
-            <p>Explanation</p>
-            <p>Relevency</p>
+            {SortByList.map((ele) => (
+              <p key={ele}>{ele}</p>
+            ))}
           </div>
         ) : (
           <></>
@@ -278,7 +288,6 @@ const Filters = () => {
                   <span
                     style={{ marginTop: "5px" }}
                     className="selectedOptions"
-
                   >
                     {ele}&nbsp;
                     {
@@ -298,19 +307,29 @@ const Filters = () => {
         </div>
       </>
       <>
-        <div className={dateRange ? "optionContainerHighlited" : "optionContainer"}>
+        <div
+          className={dateRange ? "optionContainerHighlited" : "optionContainer"}
+        >
           <div className="option">Date range</div>
           {!dateRange ? (
             <div className="arrowicon">
               <KeyboardArrowDownIcon
-                sx={{ fontSize: "2vmax", color: "#49356C", paddingRight: "3px" }}
+                sx={{
+                  fontSize: "2vmax",
+                  color: "#49356C",
+                  paddingRight: "3px",
+                }}
                 onClick={clickHandlerDateRange}
               />
             </div>
           ) : (
             <div className="arrowicon">
               <KeyboardArrowUpIcon
-                sx={{ fontSize: "2vmax", color: "#8246FF", paddingRight: "3px" }}
+                sx={{
+                  fontSize: "2vmax",
+                  color: "#8246FF",
+                  paddingRight: "3px",
+                }}
                 onClick={clickHandlerDateRange}
               />
             </div>
@@ -318,13 +337,14 @@ const Filters = () => {
         </div>
         {dateRange ? (
           <div className="manuItem" onClick={menuItemHandlerDate}>
-            <p>Profile</p>
-            <p>My account</p>
-            <p>Logout</p>
+            {DateRangeList.map((ele) => (
+              <p key={ele}>{ele}</p>
+            ))}
           </div>
         ) : (
           <></>
         )}
+
         <div className="showSelecedOptions">
           {dateChoosenOptions.length > 0 ? (
             <>
@@ -354,19 +374,29 @@ const Filters = () => {
         </div>
       </>
       <>
-        <div className={versions ? "optionContainerHighlited" : "optionContainer"}>
+        <div
+          className={versions ? "optionContainerHighlited" : "optionContainer"}
+        >
           <div className="option">Version Change</div>
           {!versions ? (
             <div className="arrowicon">
               <KeyboardArrowDownIcon
-                sx={{ fontSize: "2vmax", color: "#49356C", paddingRight: "3px" }}
+                sx={{
+                  fontSize: "2vmax",
+                  color: "#49356C",
+                  paddingRight: "3px",
+                }}
                 onClick={clickHandlerVersion}
               />
             </div>
           ) : (
             <div className="arrowicon">
               <KeyboardArrowUpIcon
-                sx={{ fontSize: "2vmax", color: "#8246FF", paddingRight: "3px" }}
+                sx={{
+                  fontSize: "2vmax",
+                  color: "#8246FF",
+                  paddingRight: "3px",
+                }}
                 onClick={clickHandlerVersion}
               />
             </div>
@@ -374,11 +404,9 @@ const Filters = () => {
         </div>
         {versions ? (
           <div className="manuItem" onClick={menuItemHandlerVersion}>
-            {
-              appVersion.map((ele) => (
-                <p key={ele}>{ele}</p>
-              ))
-            }
+            {appVersion.map((ele) => (
+              <p key={ele}>{ele}</p>
+            ))}
           </div>
         ) : (
           <></>
@@ -412,19 +440,29 @@ const Filters = () => {
         </div>
       </>
       <>
-        <div className={ratings ? "optionContainerHighlited" : "optionContainer"}>
+        <div
+          className={ratings ? "optionContainerHighlited" : "optionContainer"}
+        >
           <div className="option">Rating</div>
           {!ratings ? (
             <div className="arrowicon">
               <KeyboardArrowDownIcon
-                sx={{ fontSize: "2vmax", color: "#49356C", paddingRight: "3px" }}
+                sx={{
+                  fontSize: "2vmax",
+                  color: "#49356C",
+                  paddingRight: "3px",
+                }}
                 onClick={clickHandlerRating}
               />
             </div>
           ) : (
             <div className="arrowicon">
               <KeyboardArrowUpIcon
-                sx={{ fontSize: "2vmax", color: "#8246FF", paddingRight: "3px" }}
+                sx={{
+                  fontSize: "2vmax",
+                  color: "#8246FF",
+                  paddingRight: "3px",
+                }}
                 onClick={clickHandlerRating}
               />
             </div>
@@ -433,82 +471,94 @@ const Filters = () => {
         {ratings ? (
           <div className="manuItem-ratings" onClick={menuItemHandlerRating}>
             <Checkbox value={5} />
-            {
-              Array.from({ length: 5 }).map((_, index) => (
-                <span><StarIcon sx={{ color: '#160042' }} /></span>
-              ))
-            }
+            {Array.from({ length: 5 }).map((_, index) => (
+              <span>
+                <StarIcon sx={{ color: "#2736a3" }} />
+              </span>
+            ))}
             <br />
-            <Checkbox value={4} />{
-              Array.from({ length: 4 }).map((_, index) => (
-                <span><StarIcon sx={{ color: '#160042' }} /></span>
-              ))
-            }
+            <Checkbox value={4} />
+            {Array.from({ length: 4 }).map((_, index) => (
+              <span>
+                <StarIcon sx={{ color: "#2736a3" }} />
+              </span>
+            ))}
             <br />
-            <Checkbox value={3} />{
-              Array.from({ length: 3 }).map((_, index) => (
-                <span><StarIcon sx={{ color: '#160042' }} /></span>
-              ))
-            }
+            <Checkbox value={3} />
+            {Array.from({ length: 3 }).map((_, index) => (
+              <span>
+                <StarIcon sx={{ color: "#2736a3" }} />
+              </span>
+            ))}
             <br />
-            <Checkbox value={2} />{
-              Array.from({ length: 2 }).map((_, index) => (
-                <span><StarIcon sx={{ color: '#160042' }} /></span>
-              ))
-            }
+            <Checkbox value={2} />
+            {Array.from({ length: 2 }).map((_, index) => (
+              <span>
+                <StarIcon sx={{ color: "#2736a3" }} />
+              </span>
+            ))}
             <br />
-            <Checkbox value={1} />{
-              Array.from({ length: 1 }).map((_, index) => (
-                <span key={index}><StarIcon sx={{ color: '#160042' }} /></span>
-              ))
-            }
+            <Checkbox value={1} />
+            {Array.from({ length: 1 }).map((_, index) => (
+              <span key={index}>
+                <StarIcon sx={{ color: "#2736a3" }} />
+              </span>
+            ))}
           </div>
         ) : (
           <></>
         )}
         <div className="showSelecedOptions">
-          {
-            ratingOptions.length > 0 ? (
-              <>
-                <div className="middleDivider"> </div>
-                {
-                  ratingOptions.map((ele, idx) => (
-                    <div className="selectedOptionsDiv-selectedOptions">
-                      {
-                        Array.from({ length: ele }).map((_, index) => (
-                          <span key={index} style={{ marginTop: "5px" }} ><StarIcon sx={{ color: '#160042' }} /></span>
-                        ))
-                      }
-                      &nbsp;
-                      {
-                        <ClearIcon
-                          onClick={() => removeOptionRaing(idx)}
-                          sx={{ fontSize: 19 }}
-                        />
-                      }
-                    </div>
+          {ratingOptions.length > 0 ? (
+            <>
+              <div className="middleDivider"> </div>
+              {ratingOptions.map((ele, idx) => (
+                <div className="selectedOptionsDiv-selectedOptions">
+                  {Array.from({ length: ele }).map((_, index) => (
+                    <span key={index} style={{ marginTop: "5px" }}>
+                      <StarIcon sx={{ color: "#2736a3" }} />
+                    </span>
                   ))}
-              </>
-            ) : (
-              <></>
-            )}
+                  &nbsp;
+                  {
+                    <ClearIcon
+                      onClick={() => removeOptionRaing(idx)}
+                      sx={{ fontSize: 19 }}
+                    />
+                  }
+                </div>
+              ))}
+            </>
+          ) : (
+            <></>
+          )}
         </div>
       </>
 
       <>
-        <div className={review ? "optionContainerHighlited" : "optionContainer"}>
+        <div
+          className={review ? "optionContainerHighlited" : "optionContainer"}
+        >
           <div className="option">Review type</div>
           {!review ? (
             <div className="arrowicon">
               <KeyboardArrowDownIcon
-                sx={{ fontSize: "2vmax", color: "#49356C", paddingRight: "3px" }}
+                sx={{
+                  fontSize: "2vmax",
+                  color: "#49356C",
+                  paddingRight: "3px",
+                }}
                 onClick={clickHandlerReview}
               />
             </div>
           ) : (
             <div className="arrowicon">
               <KeyboardArrowUpIcon
-                sx={{ fontSize: "2vmax", color: "#8246FF", paddingRight: "3px" }}
+                sx={{
+                  fontSize: "2vmax",
+                  color: "#8246FF",
+                  paddingRight: "3px",
+                }}
                 onClick={clickHandlerReview}
               />
             </div>
@@ -516,9 +566,9 @@ const Filters = () => {
         </div>
         {review ? (
           <div className="manuItem" onClick={menuItemHandlerReview}>
-            <p>Bug</p>
-            <p>Feature request</p>
-            <p>Appreciation</p>
+            {BugList.map((ele) => (
+              <p key={ele}>{ele}</p>
+            ))}
           </div>
         ) : (
           <></>
@@ -532,7 +582,6 @@ const Filters = () => {
                   <span
                     style={{ marginTop: "5px" }}
                     className="selectedOptions"
-
                   >
                     {ele}&nbsp;
                     {
@@ -552,19 +601,29 @@ const Filters = () => {
         </div>
       </>
       <>
-        <div className={deviceopt ? "optionContainerHighlited" : "optionContainer"}>
+        <div
+          className={deviceopt ? "optionContainerHighlited" : "optionContainer"}
+        >
           <div className="option">Device</div>
           {!deviceopt ? (
             <div className="arrowicon">
               <KeyboardArrowDownIcon
-                sx={{ fontSize: "2vmax", color: "#49356C", paddingRight: "3px" }}
+                sx={{
+                  fontSize: "2vmax",
+                  color: "#49356C",
+                  paddingRight: "3px",
+                }}
                 onClick={clickHandlerDevice}
               />
             </div>
           ) : (
             <div className="arrowicon">
               <KeyboardArrowUpIcon
-                sx={{ fontSize: "2vmax", color: "#8246FF", paddingRight: "3px" }}
+                sx={{
+                  fontSize: "2vmax",
+                  color: "#8246FF",
+                  paddingRight: "3px",
+                }}
                 onClick={clickHandlerDevice}
               />
             </div>
@@ -572,12 +631,9 @@ const Filters = () => {
         </div>
         {deviceopt ? (
           <div className="manuItem" onClick={menuItemHandlerDevice}>
-            {
-              categories.map((category) => (
-
-                <p key={category}>{category}</p>
-              ))
-            }
+            {categories.map((category) => (
+              <p key={category}>{category}</p>
+            ))}
           </div>
         ) : (
           <></>
@@ -591,7 +647,6 @@ const Filters = () => {
                   <span
                     style={{ marginTop: "5px" }}
                     className="selectedOptions"
-
                   >
                     {ele}&nbsp;
                     {
@@ -616,14 +671,22 @@ const Filters = () => {
           {!like ? (
             <div className="arrowicon">
               <KeyboardArrowDownIcon
-                sx={{ fontSize: "2vmax", color: "#49356C", paddingRight: "3px" }}
+                sx={{
+                  fontSize: "2vmax",
+                  color: "#49356C",
+                  paddingRight: "3px",
+                }}
                 onClick={clickHandlerLike}
               />
             </div>
           ) : (
             <div className="arrowicon">
               <KeyboardArrowUpIcon
-                sx={{ fontSize: "2vmax", color: "#8246FF", paddingRight: "3px" }}
+                sx={{
+                  fontSize: "2vmax",
+                  color: "#8246FF",
+                  paddingRight: "3px",
+                }}
                 onClick={clickHandlerLike}
               />
             </div>
@@ -649,7 +712,6 @@ const Filters = () => {
                   <span
                     style={{ marginTop: "5px" }}
                     className="selectedOptions"
-
                   >
                     {ele}&nbsp;
                     {
@@ -669,13 +731,22 @@ const Filters = () => {
         </div>
       </>
 
-      <Button variant='contained' sx={{ width: '100%', borderRadius: '0px' }} onClick={applyFilterHandler}>Apply</Button>
-      <Button color='success' sx={{ width: '100%', borderRadius: '0px' }} onClick={resetFilterHandler}>Reset all</Button>
+      <Button
+        variant="contained"
+        sx={{ width: "100%", borderRadius: "0px" }}
+        onClick={applyFilterHandler}
+      >
+        Apply
+      </Button>
+      <Button
+        color="success"
+        sx={{ width: "100%", borderRadius: "0px" }}
+        onClick={resetFilterHandler}
+      >
+        Reset all
+      </Button>
     </div>
-  )
-}
+  );
+};
 
-export default Filters
-
-
-
+export default Filters;

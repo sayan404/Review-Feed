@@ -2,7 +2,8 @@ import React from "react";
 import Reviews from "./Reviews";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import Loader from "./Loader";
+// import Loader from "./Loader";
+import BarLoader from "react-spinners/BarLoader"
 const ReviewSection = () => {
 
   const { loading, reviews } = useSelector((state) => state.reviews);
@@ -12,7 +13,7 @@ const ReviewSection = () => {
   return (
     <div>
       {loading ? (
-        <Loader />
+        <BarLoader color="#07a1d9" style={{display: "block" , margin: "0 auto"}}/>
       ) : reviewData ? (
         reviewData.map((review) => (
           <Reviews

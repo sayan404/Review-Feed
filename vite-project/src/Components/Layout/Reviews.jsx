@@ -12,7 +12,7 @@ const Reviews = ({author , postedOn , reviewText , productVersion , productName 
           <p>{postedOn}</p>
         </div>
         <div className='rightTopSection'>
-          <p>{reviewType}</p>
+          <p style={{color : 'green'}}>{reviewType}</p>
         </div>
       </div>
       <p className='sectionDivider'></p>
@@ -20,10 +20,9 @@ const Reviews = ({author , postedOn , reviewText , productVersion , productName 
         <div className='leftBottomSection'>{reviewText}
         </div>
         <div className='rightBottomSection'>
-          <p>{numLikes}</p><p><ThumbUpOffAltIcon variant = 'outline' /></p>
+          <p>{numLikes}</p><p><ThumbUpOffAltIcon variant ='contained' color='primary'/></p>
           <p>{productVersion}</p>
           <p>{productName}</p>
-          <p>Android 13</p>
           <p>{productType}</p>
         </div>
       </div>
