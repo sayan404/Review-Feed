@@ -7,7 +7,7 @@ export const getProductReviews = (deviceOptions = [] , ratingOptions =[] , versi
         dispatch({
             type: ALL_REVIEW_REQUEST,
         });
-        let link = `http://localhost:8080/api/v1/reviews?deviceOptions=${deviceOptions}&ratingOptions=${ratingOptions}&versionOptions=${versionOptions}&reviewOptions=${reviewOptions}&likeOptions=${likeOptions}&keyword=${keyword}`
+        let link = `https://reviewfeed.onrender.com/api/v1/reviews?deviceOptions=${deviceOptions}&ratingOptions=${ratingOptions}&versionOptions=${versionOptions}&reviewOptions=${reviewOptions}&likeOptions=${likeOptions}&keyword=${keyword}`
 
         const { data } = await axios.get(link);
         dispatch({
