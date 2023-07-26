@@ -1,7 +1,6 @@
 import { ALL_REVIEW_FAIL, ALL_REVIEW_REQUEST, ALL_REVIEW_SUCCESS, CLEAR_ERRORS } from "../Constants/ReviewConstants";
 import axios from "axios";
 export const getProductReviews = (deviceOptions = [] , ratingOptions =[] , versionOptions = [], reviewOptions = [], likeOptions =[] , keyword ="") => async (dispatch) => {
-console.log(keyword);
     try {
         // this is fetching data from backend
         dispatch({
