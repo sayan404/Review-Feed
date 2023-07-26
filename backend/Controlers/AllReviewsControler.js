@@ -28,10 +28,12 @@ exports.getProductReview = catchAsyncError(async (req, res, next) => {
     // if (keyword) {
     //     queryObject.productName = { $regex: keyword, $options: "i" }
     // }
+    // console.log("1");
 
     try {
         allReviews.push(await ProductReview.find(queryObject));
         const productListLength = allReviews.length;
+        // console.log(allReviews);
         res.json({
             success: true,
             productListLength,
